@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url(https://static.wixstatic.com/media/3af116_06c13c5dd6434de4841b47ad6898f9c5~mv2.jpg/v1/fill/w_640,h_360,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/3af116_06c13c5dd6434de4841b47ad6898f9c5~mv2.jpg);
+            background-color: black;
+            color: white;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background-color: #e5bcf0;
+            border-radius: 10px;
+        }
+        h1 {
+            background-color: #493D9E;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Georgia, serif;
+        }
+        .section-header {
+            background-color: pink;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .section-content {
+            display: none;
+            padding: 10px;
+            background-color: #ba89c7;
+            border-radius: 5px;
+        }
+        input, select, button {
+            width: 80%;
+            padding: 8px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #493D9E;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2A004E;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ticketing Center</h1>
+
+        <div class="section-header" onclick="toggleSection('personal-info')">
+            ▼ Personal Information
+        </div>
+        <div id="personal-info" class="section-content">
+            <p>Fill out the form below.</p>
+            <input type="text" id="name" placeholder="Complete Name">
+            <input type="email" id="email" placeholder="Email">
+            <button onclick="submitInfo()">SUBMIT INFO</button>
+        </div>
+
+        <div class="section-header" onclick="toggleSection('ticket-price')">
+            ▼ Ticket Price
+        </div>
+        <div id="ticket-price" class="section-content">
+            <p>Check your ticket price</p>
+            <select id="seat">
+                <option value="None">None</option>
+                <option value="GENERAL ADMISSION">GENERAL ADMISSION</option>
+                <option value="UPPER BOX">UPPER BOX</option>
+                <option value="VIP SEATED">VIP SEATED</option>
+                <option value="VIP STANDING">VIP STANDING</option>
+            </select>
+            <p>Choose an option</p>
+            <select id="discount">
+                <option value="None">None</option>
+                <option value="Student">Student</option>
+                <option value="Senior Citizen">Senior</option>
+                 <option value="PWD">PWD</option>
+            </select>
+            <button onclick="getTicketPrice()">TICKET PRICE</button>
+        </div>
+
+        <div class="section-header" onclick="toggleSection('print-ticket')">
+            ▼ Print Ticket
+        </div>
+        <div id="print-ticket" class="section-content">
+            <p>Select your ticket.</p>
+            <button onclick="printTicket()">PRINT TICKET</button>
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "none" || section.style.display === "") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+
+        function submitInfo() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+                alert("Information Submitted:\nName: " + name + "\nEmail: " + email);
+        }
+
+        function getTicketPrice() {
+            var seat = document.getElementById("seat").value;
+            var discount = document.getElementById("discount").value;
+            var price = 0;
+
+            if (seat === "GENERAL ADMISSION") price = 1500;
+            if (seat === "UPPER BOX") price = 1700;
+            if (seat === "VIP SEATED") price = 3400;
+            if (seat === "VIP STANDING") price = 5000;
+
+            if (discount === "PWD") price *= 0.8;
+            if (discount === "Senior Citizen") price *= 0.7;
+            if (discount === "Student") price *= 0.6;
+
+            document.getElementById("result").innerText = "Ticket Price: ₱" + price.toFixed(2);
+        }
+
+        function printTicket() {
+            alert("Your ticket is being printed!");
+        }
+    </script>
+
+</body>
+</html>
